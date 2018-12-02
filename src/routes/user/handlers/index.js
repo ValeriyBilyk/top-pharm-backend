@@ -18,7 +18,7 @@ async function userListGET (req, res, next) {
   // ?sort[]=name&sort[]=-propName
   const { sort } = req.query;
 
-  const users = await User.getAllUsers(sort);
+  const users = await User.find(sort);
 
   res.send(users);
 }

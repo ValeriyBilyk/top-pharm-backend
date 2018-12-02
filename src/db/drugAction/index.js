@@ -2,13 +2,13 @@ const mongoose = require('mongoose');
 
 const {Types: mongooseTypes} = mongoose.Schema;
 
-const orderSchema = new mongoose.Schema({
+const drugAction = new mongoose.Schema({
   user: {
     type: mongooseTypes.ObjectId,
     ref: 'User',
     required: true
   },
-  purchases: [{
+  actions: [{
       drug: {
         type: mongooseTypes.ObjectId,
         ref: 'Drug',
@@ -21,9 +21,13 @@ const orderSchema = new mongoose.Schema({
     type: mongooseTypes.Date,
     // `Date.now()` returns the current unix timestamp as a number
     default: Date.now
+  },
+  type: {
+    type: mongooseTypes.String,
+    enum: ['order', 'increase-amount', 'decrease-amount']
   }
 });
 
-const Order = mongoose.model('Order', orderSchema);
+const DrugAction = mongoose.model('DrugAction', drugAction, 'drugActions');
 
-module.exports = Order;
+module.exports = DrugAction;
